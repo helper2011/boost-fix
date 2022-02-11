@@ -7,8 +7,8 @@
 #pragma newdecls required
 
 public Plugin myinfo = {
-	name        = "boost-fix",
-	author      = "Tengu",
+	name        = "boost-fix [HnS]",
+	author      = "Tengu, edited by hEl",
 	description = "<insert_description_here>",
 	version     = "0.1",
 	url         = "http://steamcommunity.com/id/tengulawl/"
@@ -211,8 +211,6 @@ public Action Projectile_StartTouch(int entity, int client) {
 		return Plugin_Continue;
 	}
 
-	CreateTimer(0.25, Timer_RemoveEntity, EntIndexToEntRef(entity), TIMER_FLAG_NO_MAPCHANGE);
-
 	if (g_boostStep[client] || g_playerFlags[client] & FL_ONGROUND) {
 		return Plugin_Continue;
 	}
@@ -243,13 +241,5 @@ public Action Projectile_StartTouch(int entity, int client) {
 public Action Projectile_EndTouch(int entity, int other) {
 	if (!other) {
 		g_bouncedOff[entity] = true;
-	}
-}
-
-public Action Timer_RemoveEntity(Handle timer, any entref) {
-	int entity = EntRefToEntIndex(entref);
-
-	if (entity != INVALID_ENT_REFERENCE) {
-		AcceptEntityInput(entity, "Kill");
 	}
 }
